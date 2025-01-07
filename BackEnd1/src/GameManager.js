@@ -14,6 +14,7 @@ export class GameManager {
   addUser(socket) {
     this.users.push(socket);
     this.addHandler(socket);
+    console.log(`User added: ${socket}`);
   }
 
   //Logic to remove users
@@ -32,8 +33,10 @@ export class GameManager {
           const game = new Game(this.pendingUser, socket);
           this.games.push(game);
           this.pendingUser = null;
+          console.log("Game started between users");
         } else {
           this.pendingUser = socket;
+          console.log("Pending user waiting for opponent");
         }
       }
 
