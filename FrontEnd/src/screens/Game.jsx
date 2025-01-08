@@ -21,7 +21,7 @@ export default function Game() {
     }
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      
+
       switch (message.type) {
         case INIT_GAME:
           // setChess(new Chess());
@@ -61,7 +61,7 @@ export default function Game() {
             </div>
           </div>
 
-          <div className="col-span-2 bg-slate-400 w-full justify-center flex my-5">
+          <div className="col-span-2 bg-slate-500 w-full justify-center flex my-5">
             {!started && (
               <Button
                 className="play-now-btn"
