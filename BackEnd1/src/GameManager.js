@@ -25,7 +25,7 @@ export class GameManager {
   //Logic to handle incoming messages
   addHandler(socket) {
     socket.on("message", (data) => {
-     let message = JSON.parse(data.toString());
+     let message = JSON.parse(data.toStrin ());
 
       if (message.type === INIT_GAME) {
         if (this.pendingUser) {
@@ -45,7 +45,7 @@ export class GameManager {
           (game) => game.player1 === socket || game.player2 === socket
         );
         if (game) {
-          game.makeMove(socket, message.move);
+          game.makeMove(socket, message.payload.move);
         }
       }
     });
