@@ -4,45 +4,84 @@ body, html {
   height: 100%;
 }
 
+@keyframes backgroundZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Fullscreen background container */
 .landing-container {
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden; /* Important for the zoom animation */
+}
+
+.landing-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: url('../assets/chess-and-chessboard.jpg') no-repeat center center;
   background-size: cover;
-  position: relative;
+  animation: backgroundZoom 7s ease-in-out infinite;
 }
 
 /* Position the button box */
 .content {
   position: absolute;
-  right: 8%; 
-  top: 50%; 
+  right: 7%;
+  top: 40%;
   transform: translateY(-50%);
   text-align: center;
+  animation: fadeInRight 1s ease-out forwards;
+  z-index: 1;
 }
 
 /* Box around the button */
 .button-box {
-  background-color: #743589; 
-  padding: 2rem; 
-  border-radius: 8px; 
-  color: white; 
-  width: 570px;
-  max-width: 600px; 
+  background-color: rgba(137, 53, 129, 0.95);
+  padding: 3rem;
+  border-radius: 8px;
+  color: white;
+  height: 240px;
+  width: 580px;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 /* Heading styling */
 .button-box h1 {
-  font-size: 2.5rem; 
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  line-height: 1.5; 
+  line-height: 1.5;
 }
 
 /* Button styling */
 .play-now-btn {
-  background-color: #e98f1a; 
+  background-color: #e98f1a;
   color: white;
   font-size: 3rem;
   font-weight: bold;
@@ -50,9 +89,30 @@ body, html {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .play-now-btn:hover {
-  background-color: #b16e17; 
+  background-color: #b16e17;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .button-box {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .content {
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+  
+  .button-box h1 {
+    font-size: 2rem;
+  }
+  
+  .play-now-btn {
+    font-size: 2.5rem;
+  }
 }

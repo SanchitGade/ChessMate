@@ -40,45 +40,49 @@ export default function Game() {
           break;
       }
     };
-  }, [socket]);
+  }, [socket, chess]);
 
   // if (!socket){
   //     return <div> Connecting... </div>
   // }
 
   return (
-    <>
-      <div className="justify-center flex">
-        <div className="pt-8 max-w-screen-lg w-full">
-          <div className="grid grid-cols-6 gap-4 w-full">
-            <div className="col-span-4 bg-red-300 w-full flex justify-center border">
-              <Chessboard
-                board={board}
-                socket={socket}
-                setBoard={setBoard}
-                chess={chess}
-              />
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#2a1635] to-[#582e71] p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-[#d4b6e0] mb-4">Chess Game</h1>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="md:col-span-2">
+            <Chessboard
+              board={board}
+              socket={socket}
+              setBoard={setBoard}
+              chess={chess}
+            />
           </div>
-
-          <div className="col-span-2 bg-slate-500 w-full justify-center flex my-5">
-            {!started && (
-              <Button
-                className="play-now-btn"
-                onClick={() => {
-                  socket.send(
-                    JSON.stringify({
-                      type: INIT_GAME,
-                    })
-                  );
-                }}
-              >
-                S T A R T
-              </Button>
-            )}
+          
+          <div className="md:col-span-1">
+            <div className="bg-[#3d1f4d] p-6 rounded-lg shadow-lg">
+              <h2 className="text-[#d4b6e0] text-xl font-semibold mb-4">Game Controls</h2>
+              {!started && (
+                <button
+                  className="w-full bg-[#8b4ca8] text-white py-3 px-6 rounded-lg
+                    font-bold tracking-wider hover:bg-[#9b6fb0]
+                    transition-colors duration-200 shadow-lg
+                    start-button"
+                  onClick={() => {
+                    socket?.send(JSON.stringify({ type: INIT_GAME }));
+                  }}
+                >
+                  START GAME
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
