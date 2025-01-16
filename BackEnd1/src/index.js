@@ -11,7 +11,7 @@ wss.on("connection", function connection(ws) {
     console.log("received: %s", data);
   });
 
-  gameManager.addUser(ws); // To Add the Player
+  gameManager.addUser(ws);                          // To Add the Player
 
   ws.on("close", () => gameManager.removeUser(ws)); // Use "close" instead of "disconnect"
 });
